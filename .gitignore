@@ -1,0 +1,35 @@
+# Local agent files — never commit
+CLAUDE.md
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Node / Expo
+node_modules/
+.expo/
+dist/
+web-build/
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Private data
+ml/data/raw/
+*.local.csv
+
+# OS
+.DS_Store
+Thumbs.db
