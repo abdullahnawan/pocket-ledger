@@ -33,3 +33,20 @@ ml/data/raw/
 # OS
 .DS_Store
 Thumbs.db
+
+# Expo / React Native native build artifacts
+expo-env.d.ts
+.metro-health-check*
+*.tsbuildinfo
+*.orig.*
+.kotlin/
+/ios
+/android
+
+# Signing credentials
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.pem
