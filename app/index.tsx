@@ -1,18 +1,16 @@
-import { StyleSheet, Text, View, useColorScheme } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function Index() {
-  const dark = useColorScheme() === 'dark';
-
   return (
-    <View style={[styles.container, dark && styles.containerDark]}>
-      <Text style={[styles.title, dark && styles.textDark]}>Pocket Ledger</Text>
-      <Text style={[styles.subtitle, dark && styles.subtitleDark]}>
-        Nothing here yet. Quick add comes next.
-      </Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Pocket Ledger</Text>
+      <Text style={styles.subtitle}>Nothing here yet. Quick add comes next.</Text>
     </View>
   );
 }
 
+// Fixed light colors on purpose: a color-scheme branch here renders differently on
+// the server than on the client, which breaks web hydration. Theming comes in Phase 11.
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -21,9 +19,6 @@ const styles = StyleSheet.create({
     gap: 8,
     padding: 24,
     backgroundColor: '#ffffff',
-  },
-  containerDark: {
-    backgroundColor: '#000000',
   },
   title: {
     fontSize: 24,
@@ -34,11 +29,5 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
     color: '#666666',
-  },
-  textDark: {
-    color: '#f2f2f2',
-  },
-  subtitleDark: {
-    color: '#9b9b9b',
   },
 });
