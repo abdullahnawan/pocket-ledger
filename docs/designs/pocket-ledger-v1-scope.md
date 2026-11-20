@@ -6,6 +6,10 @@ Repo: abdullahnawan/pocket-ledger
 Status: APPROVED
 Mode: Startup
 
+## Updates
+- 2026-11-19: The second tester is Fatime, from the trip group.
+- 2026-11-19: The web preview stays. The app is a portrait phone layout, including in the browser. See `docs/decisions/001-phone-layout-web-preview.md`.
+
 ## Problem Statement
 
 Abdullah and his friends are trying to budget and save a target amount for a trip next summer. None of them has a system: no spreadsheet, no notes app, not even a habit of checking the bank app. Pocket Ledger is the tool meant to close that gap — log a purchase in under 10 seconds, see the month at a glance, import bank CSVs instead of typing history by hand.
@@ -35,7 +39,7 @@ Cost of the workaround: he does not know whether he is on pace for the trip. Tha
 
 **User zero:** Abdullah. Student in Canada, saving toward a specific summer trip with friends.
 
-**Second user:** an unnamed friend from the trip group. Naming them is part of the assignment.
+**Second user:** Fatime, from the trip group. Named 2026-11-19. What she currently uses to track money is still unrecorded.
 
 **Narrowest wedge:** an installed app where logging a purchase takes under 10 seconds and the month view answers "how am I doing" without any setup beyond signing up. No CSV import, no model, no insights. If that does not get opened in week three, nothing downstream matters.
 
@@ -83,7 +87,7 @@ Recorded as decision `676625b9-36aa-4915-9ce6-2d2b0d0a36e1`. Ceiling: no ML in t
 
 ## Open Questions
 
-1. **Who is the second user?** A first name and what they actually said about money. Without it, "some actual users" has nobody to text.
+1. **Who is the second user?** Resolved 2026-11-19: Fatime. What she currently uses to track money is still unrecorded.
 2. **Does the trip-savings framing return in v2?** The strongest demand signal in this session points at a goal-with-a-deadline product, and the forecast (Phase 8) is the feature that answers it. Deferred, not dismissed.
 3. **Does v1 need any nudge at all?** Premise 3 accepts the retention risk. If week three of dogfooding goes quiet, this becomes the next thing to build, not Phase 5.
 4. **Expo SDK version and new architecture default** — settle with Context7 before scaffolding.
@@ -95,12 +99,12 @@ Recorded as decision `676625b9-36aa-4915-9ce6-2d2b0d0a36e1`. Ceiling: no ML in t
 1. APK installed on Abdullah's own phone at the end of Phase 4, not Phase 11.
 2. Quick add measured at under 10 seconds, stopwatch on five real entries, recorded.
 3. 28 consecutive days with at least one logged transaction on every day he spent money. Count it honestly; a gap is a finding.
-4. At least one other person from the trip group has it installed and has logged 10 or more transactions.
+4. Fatime has it installed and has logged 10 or more transactions.
 5. `npm test`, `npm run typecheck` and `npm run lint` clean on every commit.
 
 ## Distribution Plan
 
-- **Development:** Expo Go on his own device from Phase 0 onward.
+- **Development:** Expo Go on a phone from Phase 0 onward. `npm run web` stays as a phone-width preview for layout checks. The phone is the real check.
 - **v1 release:** EAS Build, Android APK, sideloaded to his phone and to friends' phones directly. No Play Store for v1.
 - **CI:** GitHub Actions running typecheck, lint and Jest on every push and PR (Phase 0). The pytest job arrives with the `ml/` package later.
 - The roadmap currently builds an APK only at Phase 11. Approach A moves the first build forward to the end of Phase 4.

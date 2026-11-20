@@ -16,8 +16,9 @@ One commit, no new behavior.
 - Delete the `reset-project` script — it calls a file that does not exist.
 - Remove the seven dependencies nothing imports: `@expo/ui`, `expo-glass-effect`,
   `expo-symbols`, `expo-image`, `expo-web-browser`, `expo-device`, `expo-font`.
-- Decide on web: drop `react-dom`, `react-native-web`, the `web` script and the
-  `web` block in `app.json`, unless a browser preview is wanted for quick UI work.
+- Web stays. Keep `react-dom`, `react-native-web`, the `web` script, and the
+  `web` block in `app.json`. The browser shows the phone layout (see
+  `docs/decisions/001-phone-layout-web-preview.md`). Do not add a desktop layout.
 - **Verify:** `npx expo-doctor` clean, and `npx expo start` with the app actually
   opening in Expo Go on the phone.
 
@@ -112,5 +113,5 @@ One commit.
   phase (`phase-1-auth`) merged by PR, as the project rules say.
 - **If a step turns out bigger than one commit,** I say so and split it rather than
   quietly making one large commit.
-- **Blocked on you, not on code:** whether to keep web support (step 0), and
-  naming the second trip-group user, which is one of the v1 success criteria.
+- **Settled 2026-11-19:** the web preview stays, as a phone-width column. The
+  second tester is Fatime, from the trip group.

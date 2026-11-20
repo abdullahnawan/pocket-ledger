@@ -55,7 +55,8 @@ config, no CI workflow.
 
 ## Open items that block later work
 
-- Second trip-group user still unnamed (needed for the v1 success criteria).
+- Second tester is Fatime, from the trip group. v1 success criterion 4 is hers: installed, and 10 or more logged transactions. What she uses to track money today is still unrecorded.
+- Web preview stays. The layout is a portrait phone, including in the browser. ADR: `docs/decisions/001-phone-layout-web-preview.md`.
 - Chart library choice (`victory-native` vs `react-native-gifted-charts`) — Phase 4 ADR.
 - One month of a real bank CSV export is needed before Phase 5 can be built honestly.
 - Stray empty git repo at `C:\.git` still needs deleting by hand.
