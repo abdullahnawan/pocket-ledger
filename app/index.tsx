@@ -1,16 +1,45 @@
+import { Link } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { supabase } from '@/lib/supabase';
+
 export default function Index() {
+  const [email, setEmail] = useState<string | null | undefined>(undefined);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      setEmail(data.session?.user.email ?? null);
+    });
+  }, []);
+
+  if (email === undefined) {
+    return <View style={styles.container} />;
+  }
+
+  if (!email) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Pocket Ledger</Text>
+        <Text style={styles.subtitle}>Sign in to start tracking spending.</Text>
+        <Link href="/sign-in" style={styles.link}>
+          Sign in
+        </Link>
+        <Link href="/sign-up" style={styles.link}>
+          Create an account
+        </Link>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Pocket Ledger</Text>
-      <Text style={styles.subtitle}>Nothing here yet. Quick add comes next.</Text>
+      <Text style={styles.subtitle}>Signed in as {email}</Text>
     </View>
   );
 }
 
-// Fixed light colors on purpose: a color-scheme branch here renders differently on
-// the server than on the client, which breaks web hydration. Theming comes in Phase 11.
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -29,5 +58,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
     color: '#666666',
+  },
+  link: {
+    color: '#208AEF',
+    fontSize: 16,
+    fontWeight: '600',
+    marginTop: 4,
   },
 });
