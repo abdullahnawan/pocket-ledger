@@ -12,7 +12,7 @@ export default function RootLayout() {
     <SafeAreaProvider style={styles.provider}>
       <View style={styles.preview}>
         <View style={styles.phone}>
-          <Stack />
+          <Stack screenOptions={{ headerShown: false }} />
         </View>
       </View>
       <StatusBar style="dark" />

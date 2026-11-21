@@ -26,6 +26,10 @@ gets used for four weeks before the CSV import and data-science phases start.
 Verified absent: no `src/`, no `supabase/`, no `ml/`, no test setup, no ESLint
 config, no CI workflow.
 
+## In progress
+
+Phase 1, task 1 is done on branch `phase-1-auth`. The hosted project is `pocket-ledger` in `ca-central-1`, under the Termly organization, at $0 per month. The URL and publishable key are in `.env.local` (gitignored). `@supabase/supabase-js`, `.env.example`, and `src/lib/supabase.ts` are in the working tree. Nothing imports the client yet. The Phase 0 boxes under this (lint, tests, money helpers, CI) are still open.
+
 ## Next up (Phase 0, in order)
 
 1. `/plan-ceo-review` on the roadmap — the `/office-hours` half is done, this half isn't.
