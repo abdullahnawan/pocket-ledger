@@ -3,6 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import { Platform, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { AuthProvider } from '@/features/auth/AuthProvider';
+
 // Large-phone width. Real phones are already narrower, so this only
 // letterboxes a desktop browser. See docs/decisions/001-phone-layout-web-preview.md.
 const PHONE_MAX_WIDTH = 430;
@@ -10,11 +12,13 @@ const PHONE_MAX_WIDTH = 430;
 export default function RootLayout() {
   return (
     <SafeAreaProvider style={styles.provider}>
-      <View style={styles.preview}>
-        <View style={styles.phone}>
-          <Stack screenOptions={{ headerShown: false }} />
+      <AuthProvider>
+        <View style={styles.preview}>
+          <View style={styles.phone}>
+            <Stack screenOptions={{ headerShown: false }} />
+          </View>
         </View>
-      </View>
+      </AuthProvider>
       <StatusBar style="dark" />
     </SafeAreaProvider>
   );
