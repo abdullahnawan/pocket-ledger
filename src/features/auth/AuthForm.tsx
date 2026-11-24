@@ -64,6 +64,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           accessibilityLabel="Email"
           autoCapitalize="none"
           autoComplete="email"
+          editable={!submitting}
           keyboardType="email-address"
           onChangeText={setEmail}
           placeholder="Email"
@@ -73,7 +74,9 @@ export function AuthForm({ mode }: AuthFormProps) {
           value={email}
         />
         {showErrors && fieldErrors.email ? (
-          <Text style={styles.error}>{fieldErrors.email}</Text>
+          <Text accessibilityRole="alert" style={styles.error}>
+            {fieldErrors.email}
+          </Text>
         ) : null}
 
         <Text style={styles.label}>Password</Text>
@@ -81,6 +84,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           accessibilityLabel="Password"
           autoCapitalize="none"
           autoComplete={isSignIn ? 'current-password' : 'new-password'}
+          editable={!submitting}
           onChangeText={setPassword}
           placeholder="Password"
           secureTextEntry
@@ -90,20 +94,32 @@ export function AuthForm({ mode }: AuthFormProps) {
           value={password}
         />
         {showErrors && fieldErrors.password ? (
-          <Text style={styles.error}>{fieldErrors.password}</Text>
+          <Text accessibilityRole="alert" style={styles.error}>
+            {fieldErrors.password}
+          </Text>
         ) : null}
 
-        {formError ? <Text style={styles.error}>{formError}</Text> : null}
+        {formError ? (
+          <Text accessibilityRole="alert" style={styles.error}>
+            {formError}
+          </Text>
+        ) : null}
         {info ? <Text style={styles.info}>{info}</Text> : null}
 
         <Pressable
+          accessibilityLabel={isSignIn ? 'Sign in' : 'Create account'}
           accessibilityRole="button"
+          accessibilityState={{ disabled: submitting, busy: submitting }}
           disabled={submitting}
           onPress={onSubmit}
-          style={styles.button}
+          style={[styles.button, submitting ? styles.buttonDisabled : null]}
         >
           {submitting ? (
-            <ActivityIndicator color="#ffffff" />
+            <ActivityIndicator
+              accessibilityLabel={isSignIn ? 'Signing in' : 'Creating account'}
+              color="#ffffff"
+              testID="auth-submitting"
+            />
           ) : (
             <Text style={styles.buttonText}>{isSignIn ? 'Sign in' : 'Create account'}</Text>
           )}
@@ -168,6 +184,9 @@ const styles = StyleSheet.create({
     minHeight: 48,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  buttonDisabled: {
+    opacity: 0.7,
   },
   buttonText: {
     color: '#ffffff',

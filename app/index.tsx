@@ -1,5 +1,5 @@
 import { Redirect } from 'expo-router';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { useAuth } from '@/features/auth/AuthProvider';
 
@@ -7,7 +7,15 @@ export default function Index() {
   const { session, isLoading, signOut } = useAuth();
 
   if (isLoading) {
-    return <View style={styles.container} />;
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator
+          accessibilityLabel="Checking sign-in"
+          color="#208AEF"
+          testID="auth-loading"
+        />
+      </View>
+    );
   }
 
   if (!session) {

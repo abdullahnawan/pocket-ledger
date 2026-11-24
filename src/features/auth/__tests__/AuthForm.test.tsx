@@ -96,4 +96,43 @@ describe('AuthForm', () => {
     ).toBeOnTheScreen();
     expect(mockReplace).not.toHaveBeenCalled();
   });
+
+  it('shows a submitting state and disables the button while sign-in is in flight', async () => {
+    const user = userEvent.setup();
+    let resolveSignIn: (value: unknown) => void = () => {};
+    signInWithPassword.mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          resolveSignIn = resolve;
+        }),
+    );
+
+    await render(<AuthForm mode="sign-in" />);
+    await user.type(screen.getByTestId('email-input'), 'user@example.com');
+    await user.type(screen.getByTestId('password-input'), 'password1');
+    await user.press(screen.getByRole('button', { name: 'Sign in' }));
+
+    expect(await screen.findByTestId('auth-submitting')).toBeOnTheScreen();
+    expect(screen.getByRole('button', { name: 'Sign in' })).toBeDisabled();
+
+    resolveSignIn({ data: { session: {} }, error: null });
+    await waitFor(() => {
+      expect(mockReplace).toHaveBeenCalledWith('/');
+    });
+  });
+
+  it('exposes supabase errors with an alert role', async () => {
+    const user = userEvent.setup();
+    signInWithPassword.mockResolvedValue({
+      data: { session: null },
+      error: { message: 'Invalid login credentials' },
+    });
+
+    await render(<AuthForm mode="sign-in" />);
+    await user.type(screen.getByTestId('email-input'), 'user@example.com');
+    await user.type(screen.getByTestId('password-input'), 'password1');
+    await user.press(screen.getByRole('button', { name: 'Sign in' }));
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Invalid login credentials');
+  });
 });
